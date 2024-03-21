@@ -2,17 +2,15 @@ version: '3.8'
 
 services:
   user-db:
-    image: mysql:8.3.0
+    image: mysql:8.0
     container_name: user-db
     restart: always
     environment:
+      MYSQL_DATABASE: 'db'
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: users
-      MYSQL_USER: user
-      MYSQL_PASSWORD: root
     ports:
-      - "3306:3306"
+      - '2020:3306'
+    expose:
+      - '2020'
     volumes:
-      - mysql_data:/var/lib/mysql
-volumes:
-  mysql_data: {}
+      - '/mysql/data'

@@ -1,6 +1,7 @@
 package com.manish.user.service;
 
-import com.manish.user.dto.AddUserRequestDTO;
+import com.manish.user.dto.CreateUserRequestDTO;
+import com.manish.user.dto.EditUserRequestDTO;
 import com.manish.user.dto.GetUserDTO;
 import com.manish.user.entity.User;
 import com.manish.user.exception.ApplicationException;
@@ -20,21 +21,25 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public String createUser(@NotNull AddUserRequestDTO userDTO){
+    public String createUser(@NotNull CreateUserRequestDTO userDTO){
         log.info("|| createUser is called from UserService class ||");
 
-        if(userRepository.findByEmail(userDTO.getEmail()).isPresent())
+        if(!userDTO.getPassword1().equals(userDTO.getPassword2())){
+            throw new ApplicationException("Password dose not match");
+        }
+
+        if(userRepository.findByEmail(userDTO.getEmail()).isPresent()){
             throw new ApplicationException("User Already Exists");
+        }
 
         User user = User.builder()
                 .firstname(userDTO.getFirstname())
                 .lastname(userDTO.getLastname())
                 .email(userDTO.getEmail())
-                .password(userDTO.getPassword())
-                .roles(userDTO.getRoles())
+                .password(userDTO.getPassword1())
                 .build();
 
-        return "User Saved with user id with id : " + userRepository.save(user).getUserId();
+        return "User Saved with user id : " + userRepository.save(user).getUserId();
     }
 
     public GetUserDTO getUserByUserId(String userId){
@@ -42,30 +47,43 @@ public class UserService {
 
         Optional<User> user = userRepository.findById(userId);
 
-        return user.map(value -> GetUserDTO.builder()
-                .userId(value.getUserId())
-                .firstname(value.getFirstname())
-                .lastname(value.getLastname())
-                .email(value.getEmail())
-                .roles(value.getRoles())
-                .build()).orElse(null);
+        if(user.isEmpty()){
+            throw new ApplicationException("User dose not exist");
+        }
 
+        return GetUserDTO.builder()
+                .userId(user.get().getUserId())
+                .firstname(user.get().getFirstname())
+                .lastname(user.get().getLastname())
+                .email(user.get().getEmail())
+                .build();
     }
 
-    public GetUserDTO getUserByEmail(String email){
-        log.info("|| getUserByEmail is called from UserService class ||");
+    public String editUserByUserId(String userId, EditUserRequestDTO userRequestDTO){
+        log.info("|| editUserByUserId is called from UserService class ||");
 
-        Optional<User> user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findById(userId);
+        Optional<User> existingUser = userRepository.findByEmail(userRequestDTO.getEmail());
 
-        return user.map(value -> GetUserDTO.builder()
-                .userId(value.getUserId())
-                .firstname(value.getFirstname())
-                .lastname(value.getLastname())
-                .email(value.getEmail())
-                .roles(value.getRoles())
-                .build()).orElse(null);
+        if(existingUser.isPresent() && !existingUser.get().getUserId().equals(userId)){
+            throw new ApplicationException("Email Already Exists");
+        }
 
+        if(user.isEmpty()){
+            throw new ApplicationException("User dose not exist");
+        }
+
+        User newUser = User.builder()
+                .userId(user.get().getUserId())
+                .firstname(userRequestDTO.getFirstname())
+                .lastname(userRequestDTO.getLastname())
+                .email(userRequestDTO.getEmail())
+                .password(user.get().getPassword())
+                .build();
+
+        return "User Updated with user id : " +  userRepository.save(newUser).getUserId();
     }
+
 
     public List<GetUserDTO> getAllUsers(){
         log.info("|| getAllUsers is called from UserService class ||");
@@ -80,7 +98,6 @@ public class UserService {
                     .firstname(user.getFirstname())
                     .lastname(user.getLastname())
                     .email(user.getEmail())
-                    .roles(user.getRoles())
                     .build());
         }
 
@@ -95,17 +112,6 @@ public class UserService {
         return "User Removed";
     }
 
-    public String deleteUserByEmail(String email){
-        log.info("|| deleteUserByEmail is called from UserService class ||");
-
-        Optional<User> user = userRepository.findByEmail(email);
-
-        if(user.isEmpty()) return "User Dose not Exist";
-
-        userRepository.delete(user.get());
-
-        return "User Removed";
-    }
 
     public String deleteAllUser(){
         log.info("|| deleteAllUser is called from UserService class ||");
