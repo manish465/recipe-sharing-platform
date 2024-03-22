@@ -11,12 +11,12 @@
   | Password 2 | 8-20 Chars and Must be same as Password 1 | true | |
 
 ## Main Service Requirements
-- [ ] user can create a user
-- [ ] user can view one user by user id
-- [ ] user can view all user
-- [ ] user can delete one user by user id
-- [ ] delete all users
-- [ ] user can edit one user by user id
+- [x] user can create a user
+- [x] user can view one user by user id
+- [x] user can view all user
+- [x] user can delete one user by user id
+- [x] delete all users
+- [x] user can edit one user by user id
 - [ ] get all recipes by current user
 - [ ] get all products by current user
 - [ ] get cart

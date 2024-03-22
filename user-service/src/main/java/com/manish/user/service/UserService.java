@@ -6,10 +6,12 @@ import com.manish.user.dto.GetUserDTO;
 import com.manish.user.entity.User;
 import com.manish.user.exception.ApplicationException;
 import com.manish.user.repository.UserRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class UserService {
     private final UserRepository userRepository;
 
-    public String createUser(@NotNull CreateUserRequestDTO userDTO){
+    public String createUser(@NotNull @Valid CreateUserRequestDTO userDTO){
         log.info("|| createUser is called from UserService class ||");
 
         if(!userDTO.getPassword1().equals(userDTO.getPassword2())){
@@ -59,7 +62,7 @@ public class UserService {
                 .build();
     }
 
-    public String editUserByUserId(String userId, EditUserRequestDTO userRequestDTO){
+    public String editUserByUserId(String userId, @Valid EditUserRequestDTO userRequestDTO){
         log.info("|| editUserByUserId is called from UserService class ||");
 
         Optional<User> user = userRepository.findById(userId);
