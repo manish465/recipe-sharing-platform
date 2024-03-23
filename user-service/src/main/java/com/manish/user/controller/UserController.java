@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
 @Slf4j
 @SuppressWarnings("unused")
 public class UserController {
     private final UserService userService;
+
+    @GetMapping
+    public ResponseEntity<String> home(){
+        return new ResponseEntity<>("This is User Service", HttpStatus.OK);
+    }
 
     @PostMapping("/")
     public ResponseEntity<String> createUser(@RequestBody CreateUserRequestDTO userDTO){
