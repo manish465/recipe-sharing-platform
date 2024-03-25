@@ -15,11 +15,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/user")
 @SuppressWarnings("unused")
 public class UserController {
     private final UserService userService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<String> home(){
         return new ResponseEntity<>("This is User Service", HttpStatus.OK);
     }
