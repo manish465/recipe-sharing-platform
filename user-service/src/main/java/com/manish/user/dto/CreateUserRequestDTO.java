@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CreateUserRequestDTO {
-    @Size(min = 2, max = 15, message = "firstname field should not be less then 2 characters and more then 15 characters")
+    @Size(min = 2, message = "firstname field should not be less then 2 characters")
     private String firstname;
-    @Size(min = 2, max = 15, message = "lastname field should not be less then 2 characters and more then 15 characters")
+    @Size(min = 2, message = "lastname field should not be less then 2 characters")
     private String lastname;
     @Email(message = "enter a valid email")
     private String email;

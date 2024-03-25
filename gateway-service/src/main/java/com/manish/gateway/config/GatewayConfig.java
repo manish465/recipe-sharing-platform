@@ -16,8 +16,11 @@ public class GatewayConfig {
                 .route("user-service", r -> r
                         .path("/api/user/**")
                         .filters(f -> f.stripPrefix(1))
-                        .uri("lb://UserServiceMS/user/")
-                )
+                        .uri("lb://UserServiceMS/user/"))
+                .route("product-service", r -> r
+                        .path("/api/product/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("lb://ProductServiceMS/product/"))
                 .build();
     }
 

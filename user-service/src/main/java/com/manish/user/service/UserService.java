@@ -110,6 +110,12 @@ public class UserService {
     public String deleteUserByUserId(String userId){
         log.info("|| deleteUserByUserId is called from UserService class ||");
 
+        Optional<User> user = userRepository.findById(userId);
+
+        if(user.isEmpty()){
+            throw new ApplicationException("User dose not exist");
+        }
+
         userRepository.deleteById(userId);
 
         return "User Removed";

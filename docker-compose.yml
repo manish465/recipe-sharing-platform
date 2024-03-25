@@ -14,6 +14,19 @@ services:
       - '2020'
     volumes:
       - '/mysql/data'
+  product-db:
+    image: mysql:8.0
+    container_name: product-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - '2021:3306'
+    expose:
+      - '2021'
+    volumes:
+      - '/mysql/data'
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
