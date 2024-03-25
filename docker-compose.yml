@@ -27,6 +27,16 @@ services:
       - '2021'
     volumes:
       - '/mysql/data'
+  cart-db:
+    image: mongo
+    container_name: cart-db
+    restart: always
+    ports:
+      - '2022:27017'
+    expose:
+      - '2022'
+    volumes:
+      - '/mongo/data'
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin

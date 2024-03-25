@@ -22,6 +22,8 @@ public class UserController {
 
     @GetMapping("/")
     public ResponseEntity<String> home(){
+        log.info("|| home is called from UserController class ||");
+
         return new ResponseEntity<>("This is User Service", HttpStatus.OK);
     }
 
