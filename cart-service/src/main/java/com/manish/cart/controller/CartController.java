@@ -1,6 +1,7 @@
 package com.manish.cart.controller;
 
 import com.manish.cart.dto.CreateCartRequestDTO;
+import com.manish.cart.dto.RemoveAllItemDTO;
 import com.manish.cart.entity.Cart;
 import com.manish.cart.entity.Item;
 import com.manish.cart.service.CartService;
@@ -19,6 +20,13 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class CartController {
     private final CartService cartService;
+
+    @GetMapping("/")
+    public ResponseEntity<String> home(){
+        log.info("|| home is called from CartController class ||");
+
+        return new ResponseEntity<>("This is cart service", HttpStatus.OK);
+    }
 
     @PostMapping("/")
     public ResponseEntity<String> createCart(@RequestBody CreateCartRequestDTO createCartRequestDTO){
@@ -81,5 +89,12 @@ public class CartController {
         log.info("|| removeItemByCartId is called from CartController class ||");
 
         return new ResponseEntity<>(cartService.removeItemByCartId(cartId, item), HttpStatus.OK);
+    }
+
+    @PutMapping("/cart/remove/{cartId}/all")
+    public ResponseEntity<String> removeAllItemByCartId(@PathVariable String cartId, @RequestBody RemoveAllItemDTO removeAllItemDTO){
+        log.info("|| removeItemByCartId is called from CartController class ||");
+
+        return new ResponseEntity<>(cartService.removeAllItemByCartId(cartId, removeAllItemDTO), HttpStatus.OK);
     }
 }

@@ -21,6 +21,10 @@ public class GatewayConfig {
                         .path("/api/product/**")
                         .filters(f -> f.stripPrefix(1))
                         .uri("lb://ProductServiceMS/product/"))
+                .route("cart-service", r -> r
+                        .path("/api/cart/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("lb://CartServiceMS/cart/"))
                 .build();
     }
 

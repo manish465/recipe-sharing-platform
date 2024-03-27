@@ -1,6 +1,7 @@
 package com.manish.cart.service;
 
 import com.manish.cart.dto.CreateCartRequestDTO;
+import com.manish.cart.dto.RemoveAllItemDTO;
 import com.manish.cart.entity.Cart;
 import com.manish.cart.entity.Item;
 import com.manish.cart.exception.ApplicationException;
@@ -119,11 +120,11 @@ public class CartService {
         if(!isProductExistInItemListBy(item.getProductId(), itemList)){
             itemList.add(item);
         }else {
-            itemList.forEach(i -> {
+            for(Item i : itemList){
                 if(Objects.equals(i.getProductId(), item.getProductId())){
                     i.setCount(i.getCount() + item.getCount());
                 }
-            });
+            }
         }
 
         optionalCart.get().setItemList(itemList);
@@ -145,8 +146,8 @@ public class CartService {
             throw new ApplicationException("Item is not in the cart");
         }
 
-        itemList.forEach(i -> {
-            if(Objects.equals(i.getProductId(), item.getProductId())){
+        for(Item i : itemList){
+            if(i.getProductId().equals(item.getProductId())){
                 if(i.getCount() < item.getCount()) {
                     throw new ApplicationException("Cannot remove item from cart because of item count");
                 }
@@ -156,11 +157,40 @@ public class CartService {
                 if(i.getCount() == 0){
                     itemList.remove(i);
                 }
+
+                break;
             }
-        });
+        }
 
         optionalCart.get().setItemList(itemList);
 
-        return "Item removed to cart with cart id : " + cartRepository.save(optionalCart.get()).getCartId();
+        return "Item removed from cart with cart id : " + cartRepository.save(optionalCart.get()).getCartId();
+    }
+
+    public String removeAllItemByCartId(String cartId, @Valid RemoveAllItemDTO removeAllItemDTO) {
+        log.info("|| removeAllItemByCartId is called from CartService class ||");
+
+        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+
+        if(optionalCart.isEmpty()){
+            throw new ApplicationException("Cart dose not exist");
+        }
+
+        List<Item> itemList = optionalCart.get().getItemList();
+
+        if(!isProductExistInItemListBy(removeAllItemDTO.getProductId(), itemList)){
+            throw new ApplicationException("Item is not in the cart");
+        }
+
+        for(Item i : itemList){
+            if(i.getProductId().equals(removeAllItemDTO.getProductId())){
+                itemList.remove(i);
+                break;
+            }
+        }
+
+        optionalCart.get().setItemList(itemList);
+
+        return "Item removed from cart with cart id : " + cartRepository.save(optionalCart.get()).getCartId();
     }
 }
