@@ -25,7 +25,7 @@ public class RecipeController {
     public ResponseEntity<String> home(){
         log.info("|| home is called from RecipeController class ||");
 
-        return new ResponseEntity<>("This Recipe Service", HttpStatus.OK);
+        return new ResponseEntity<>("This is Recipe Service", HttpStatus.OK);
     }
 
     @PostMapping("/")
@@ -35,7 +35,7 @@ public class RecipeController {
         return new ResponseEntity<>(recipeService.createRecipe(createRecipeDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping("/recipe/{recipeId")
+    @GetMapping("/recipe/{recipeId}")
     public ResponseEntity<Recipe> getRecipeByRecipeId(@PathVariable String recipeId){
         log.info("|| getRecipeByRecipeId is called from RecipeController class ||");
 

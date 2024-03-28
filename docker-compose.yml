@@ -37,6 +37,16 @@ services:
       - '2022'
     volumes:
       - '/mongo/data'
+  recipe-db:
+    image: mongo
+    container_name: recipe-db
+    restart: always
+    ports:
+      - '2023:27017'
+    expose:
+      - '2023'
+    volumes:
+      - '/mongo/data'
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
