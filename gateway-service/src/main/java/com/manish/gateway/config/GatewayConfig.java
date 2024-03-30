@@ -29,6 +29,10 @@ public class GatewayConfig {
                         .path("/api/recipe/**")
                         .filters(f -> f.stripPrefix(1))
                         .uri("lb://RecipeServiceMS/recipe/"))
+                .route("auth-service", r -> r
+                        .path("/api/auth/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("lb://AuthServiceMS/auth/"))
                 .build();
     }
 

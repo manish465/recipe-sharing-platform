@@ -22,6 +22,7 @@
         <module>product-service</module>
         <module>cart-service</module>
         <module>recipe-service</module>
+        <module>auth-service</module>
     </modules>
 
     <properties>
