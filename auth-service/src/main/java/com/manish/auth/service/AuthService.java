@@ -1,7 +1,9 @@
 package com.manish.auth.service;
 
+import com.manish.auth.exception.ApplicationException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +30,18 @@ public class AuthService {
     public String extractUser(String token) {
         log.info("|| extractUser is called from AuthService class ||");
 
-        return Jwts.parser()
-                .setSigningKey(SECRET)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        String userId;
+        
+        try {
+            userId = Jwts.parser()
+                    .setSigningKey(SECRET)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (SignatureException e){
+            throw  new ApplicationException("Invalid Token");
+        }
+
+        return userId;
     }
 }
