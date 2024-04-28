@@ -5,60 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a90a867-f8e2-4980-a569-7a5c5bcb857d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/cart/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/cart/CreateCartDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/cart/GetCartDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/cart/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/cart/UpdateCartDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/inventory/CreateInventoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/inventory/GetInventoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/inventory/Inventory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/inventory/UpdateInventoryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/product/CreateProductDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/product/CreateProductReviewDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/product/GetFullProductDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/product/GetProductDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/product/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/product/UpdateProductDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/recipe/CreateRecipeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/recipe/CreateRecipeReviewDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/recipe/GetRecipeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/recipe/Recipe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/recipe/UpdateRecipeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/review/CreateReviewDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/review/GetReviewDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/review/Review.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/review/UpdateReviewDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/user/CreateUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/user/GetUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/user/LoginUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/user/UpdateUserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/dto/user/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/AuthPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/CartPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/CommonPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/InventoryPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/ProductPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/RecipePath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/ReviewPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/manish/common/path/UserPath.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/design/.$sevice.drawio.bkp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/proxy/ProxyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design/ERDiagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design/cart-sequence-diagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design/inventory-sequence-diagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design/product-sequence-diagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design/recipe-sequence-diagram.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/design/user-and-auth-sequence-diagram.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/manish/auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/manish/auth/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/design/sevice.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/design/sevice.drawio" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/dto/CreateUserRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/dto/EditUserRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/dto/ErrorResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/dto/GetUserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/manish/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/auth-service.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/discovery-service.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/gateway-service.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/requirment.md" beforeDir="false" afterPath="$PROJECT_DIR$/design/requirment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/user-service.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
