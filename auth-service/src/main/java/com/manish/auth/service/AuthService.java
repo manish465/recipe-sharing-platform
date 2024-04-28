@@ -42,6 +42,8 @@ public class AuthService {
             throw  new ApplicationException("Invalid Token");
         }
 
+        // TODO call the auth service to if the user exists or not if exist then add another header ase user authenticated
+
         return userId;
     }
 }

@@ -23,6 +23,7 @@
         <module>cart-service</module>
         <module>recipe-service</module>
         <module>auth-service</module>
+        <module>common</module>
     </modules>
 
     <properties>

@@ -1,12 +1,12 @@
 package com.manish.user.service;
 
-import com.manish.user.dto.CreateUserRequestDTO;
-import com.manish.user.dto.EditUserRequestDTO;
-import com.manish.user.dto.GetUserDTO;
+import com.manish.common.dto.user.CreateUserDTO;
+import com.manish.common.dto.user.GetUserDTO;
+import com.manish.common.dto.user.LoginUserDTO;
+import com.manish.common.dto.user.UpdateUserDTO;
 import com.manish.user.entity.User;
 import com.manish.user.exception.ApplicationException;
 import com.manish.user.repository.UserRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,108 +25,81 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public String createUser(@NotNull @Valid CreateUserRequestDTO userDTO){
+    public String createUser(@NotNull CreateUserDTO createUserDTO){
         log.info("|| createUser is called from UserService class ||");
 
-        if(!userDTO.getPassword1().equals(userDTO.getPassword2())){
-            throw new ApplicationException("Password dose not match");
-        }
-
-        if(userRepository.findByEmail(userDTO.getEmail()).isPresent()){
-            throw new ApplicationException("User Already Exists");
-        }
-
         User user = User.builder()
-                .firstname(userDTO.getFirstname())
-                .lastname(userDTO.getLastname())
-                .email(userDTO.getEmail())
-                .password(userDTO.getPassword1())
+                .firstName(createUserDTO.getFirstName())
+                .lastName(createUserDTO.getLastName())
+                .email(createUserDTO.getEmail())
+                .password(createUserDTO.getEmail())
                 .build();
 
-        return "User Saved with user id : " + userRepository.save(user).getUserId();
+        return "saved user with userID : " + userRepository.save(user).getUserId();
     }
 
-    public GetUserDTO getUserByUserId(String userId){
+    public List<GetUserDTO> getUserByUserId(List<String> userIdList){
         log.info("|| getUserByUserId is called from UserService class ||");
 
-        Optional<User> user = userRepository.findById(userId);
-
-        if(user.isEmpty()){
-            throw new ApplicationException("User dose not exist");
-        }
-
-        return GetUserDTO.builder()
-                .userId(user.get().getUserId())
-                .firstname(user.get().getFirstname())
-                .lastname(user.get().getLastname())
-                .email(user.get().getEmail())
-                .build();
-    }
-
-    public String editUserByUserId(String userId, @Valid EditUserRequestDTO userRequestDTO){
-        log.info("|| editUserByUserId is called from UserService class ||");
-
-        Optional<User> user = userRepository.findById(userId);
-        Optional<User> existingUser = userRepository.findByEmail(userRequestDTO.getEmail());
-
-        if(existingUser.isPresent() && !existingUser.get().getUserId().equals(userId)){
-            throw new ApplicationException("Email Already Exists");
-        }
-
-        if(user.isEmpty()){
-            throw new ApplicationException("User dose not exist");
-        }
-
-        User newUser = User.builder()
-                .userId(user.get().getUserId())
-                .firstname(userRequestDTO.getFirstname())
-                .lastname(userRequestDTO.getLastname())
-                .email(userRequestDTO.getEmail())
-                .password(user.get().getPassword())
-                .build();
-
-        return "User Updated with user id : " +  userRepository.save(newUser).getUserId();
-    }
-
-
-    public List<GetUserDTO> getAllUsers(){
-        log.info("|| getAllUsers is called from UserService class ||");
-
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAllById(userIdList);
 
         List<GetUserDTO> getUserDTOS = new ArrayList<>();
 
-        for(User user: users){
+        users.forEach(user -> {
             getUserDTOS.add(GetUserDTO.builder()
-                    .userId(user.getUserId())
-                    .firstname(user.getFirstname())
-                    .lastname(user.getLastname())
-                    .email(user.getEmail())
-                    .build());
-        }
+                            .userId(user.getUserId())
+                            .firstName(user.getFirstName())
+                            .lastName(user.getLastName())
+                            .email(user.getEmail()).build());
+        });
 
         return getUserDTOS;
     }
 
-    public String deleteUserByUserId(String userId){
-        log.info("|| deleteUserByUserId is called from UserService class ||");
+    public String loginUser(@NotNull LoginUserDTO loginUserDTO){
+        log.info("|| loginUser is called from UserService class ||");
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> existingUser = userRepository.findByEmail(loginUserDTO.getEmail());
 
-        if(user.isEmpty()){
+        if(existingUser.isEmpty()){
             throw new ApplicationException("User dose not exist");
         }
 
-        userRepository.deleteById(userId);
+        if(loginUserDTO.getPassword().equals(existingUser.get().getPassword())){
+            throw new ApplicationException("Incorrect password");
+        }
 
-        return "User Removed";
+        return "";
     }
 
+    public String updateUserByUserId(List<UpdateUserDTO> updateUserDTOS){
+        log.info("|| updateUserByUserId is called from UserService class ||");
 
-    public String deleteAllUser(){
-        log.info("|| deleteAllUser is called from UserService class ||");
+        List<User> users = userRepository.findAllById(
+                updateUserDTOS
+                .stream()
+                .map(UpdateUserDTO::getUserId)
+                .collect(Collectors.toList())
+        );
 
-        userRepository.deleteAll();
-        return "User Table Cleared";
+        if(users.size() != updateUserDTOS.size()){
+            throw new ApplicationException("Enter valid user id");
+        }
+
+        for(User user : users) {
+            Optional<UpdateUserDTO> updateUserDTO = updateUserDTOS
+                    .stream()
+                    .filter(updateUser -> updateUser.getUserId().equals(user.getUserId()))
+                    .findFirst();
+
+            if(updateUserDTO.isPresent()){
+                user.setFirstName(updateUserDTO.get().getFirstName());
+                user.setLastName(updateUserDTO.get().getLastName());
+                user.setEmail(updateUserDTO.get().getEmail());
+                user.setPassword(updateUserDTO.get().getPassword());
+            }
+        }
+
+        return "user updated";
     }
 }
